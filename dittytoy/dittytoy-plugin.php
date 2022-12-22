@@ -12,24 +12,6 @@ Author URI: https://reindernijhoff.net/
 $dittytoy_db_version = '1.0';
 
 function dittytoy_install() {
-	global $wpdb;
-	global $dittytoy_db_version;
-
-	$table_name = $wpdb->prefix . 'dittytoy';
-	
-	$charset_collate = $wpdb->get_charset_collate();
-
-	$sql = "CREATE TABLE $table_name (
-		id varchar(255) NOT NULL,
-  		expires datetime NOT NULL,
-  		data mediumtext NOT NULL,
-		PRIMARY KEY (id)
-	) $charset_collate;";
-
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	dbDelta( $sql );
-
-	add_option( 'dittytoy_db_version', $dittytoy_db_version );
 }
 
 function dittytoy_curl_get_contents($url) {
@@ -54,16 +36,16 @@ function dittytoy_do_query($query, $timeout = 60*60) {
 
 	$dbkey = $query;
 
-	$cached = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE id = %s AND expires > NOW()", $dbkey) );
+	$cached = get_transient( $dbkey );
 	if ($cached) {
-		$json = $cached->data;
+		$json = $cached;
 	} else {
 		$url = 'https://dittytoy.net/api/v1/' . $query;
 		$json = dittytoy_curl_get_contents($url);
 
 		json_decode($json);
 		if (json_last_error() != JSON_ERROR_NONE) {
-			$wpdb->query( $wpdb->prepare( "REPLACE INTO $table_name( id, data, expires ) VALUES ( %s, %s, NOW() + INTERVAL %d SECOND )", $dbkey, $json, $timeout ) );
+    		set_transient( $dbkey, $json, $timeout );
 		}
 	}
 
