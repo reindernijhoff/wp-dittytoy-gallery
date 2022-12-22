@@ -75,11 +75,13 @@ function dittytoy_list($atts) {
 	$a = shortcode_atts( array(
 		'username' => false,
 		'query' => '',
-		'columns' => 2,
+		'columns' => 3,
+		'limit' => 0,
 		'hideusername' => 0
 	), $atts );
 
 	$username = $a['username'];
+	$limit = $a['limit'];
 
 	$list = dittytoy_do_query($a['query']);
 	$results = $list["objects"];
@@ -88,6 +90,7 @@ function dittytoy_list($atts) {
 
 	$start = microtime(true);
 
+    $count = 0;
 	foreach ($results as $key => $turtle) {
 		$info = $turtle;
 
@@ -95,6 +98,11 @@ function dittytoy_list($atts) {
 
 		if (microtime(true) - $start > 15) {
 			break;
+		}
+
+		$count ++;
+		if ($limit > 0 && $count >= $limit) {
+		    break;
 		}
 	}
 
@@ -104,7 +112,7 @@ function dittytoy_list($atts) {
 }
 
 function dittytoy_layout_ditty($info, $hideusername) {
-	$html = '<li class="blocks-gallery-item"><figure>';
+	$html = '<li class="blocks-gallery-item" style="object-fit:cover; aspect-ratio: 16/9;"><figure>';
 	$html .= '<a href="' . $info['url'] . '" title="' . htmlentities($info['title'] . ' by ' . $info['user_id']) .'">';
 	$html .= '<picture>';
 	$html .= '<source type="image/webp" srcset="' . $info['webp'] . '" />';
