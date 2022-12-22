@@ -7,7 +7,7 @@ You can find a live demo of this plugin [here](https://reindernijhoff.net/dittyt
 Note:
 - This is (one of) the first Wordpress plugins I have ever made. 
 
-I don't want to DOS Dittytoy and I want a fast plugin. Therefore the result of a query will be cached for (at least) one day.
+I don't want to DDoS Dittytoy and I want a fast plugin. Therefore the result of a query will be cached for (at least) one day.
 
 ## Installation
 
