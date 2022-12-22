@@ -27,3 +27,4 @@ You can use the following (optional) attributes:
 
 - *query* - The query term.
 - *columns* (optional, default = 2) - Number of columns of the gallery. Values 1,2,3 and 4 are supported.
+- *limit* (optional, default = 0) - Maximum number of ditties in the gallery if limit > 0.
