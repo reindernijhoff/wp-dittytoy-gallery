@@ -1,0 +1,67 @@
+/* Dittytoy Gallery - Fully unique class names */
+
+.dittytoy-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+	align-items: normal;
+}
+
+.dittytoy-gallery-item {
+	margin: 0;
+	flex-grow: 1;
+	flex-shrink: 1;
+	position: relative;
+	overflow: hidden;
+}
+
+.dittytoy-gallery-item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	aspect-ratio: 1;
+}
+
+/* Column layout */
+.dittytoy-columns-1 .dittytoy-gallery-item {
+	flex-basis: 100%;
+	max-width: 100%;
+}
+
+.dittytoy-columns-2 .dittytoy-gallery-item {
+	flex-basis: calc(50% - 0.5em);
+	max-width: calc(50% - 0.5em);
+}
+
+.dittytoy-columns-3 .dittytoy-gallery-item {
+	flex-basis: calc(33.333% - 0.667em);
+	max-width: calc(33.333% - 0.667em);
+}
+
+.dittytoy-columns-4 .dittytoy-gallery-item {
+	flex-basis: calc(25% - 0.75em);
+	max-width: calc(25% - 0.75em);
+}
+
+.dittytoy-columns-5 .dittytoy-gallery-item {
+	flex-basis: calc(20% - 0.8em);
+	max-width: calc(20% - 0.8em);
+}
+
+.dittytoy-columns-6 .dittytoy-gallery-item {
+	flex-basis: calc(16.667% - 0.833em);
+	max-width: calc(16.667% - 0.833em);
+}
+
+.dittytoy-gallery-item figcaption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	padding: 0.5em;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+	color: #fff;
+	margin: 0;
+}
